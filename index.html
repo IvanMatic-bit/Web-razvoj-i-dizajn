@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+		html{
+			cursor: none;
+			
+			box-sizing: border-box;
+		}
+	div.n{
+		background: gray; height: 100px; width: 100px;
+		
+		position: absolute;
+		left: 200px;
+		top: 200px;
+		border-radius: 50%;
+
+	}
+	div.g{
+		 background: rgba(61, 247, 231, 0.281); height: 100px; width: 100px;
+		 
+
+	}
+	#controls{
+		position: relative;
+		float: left;
+	}
+	#enemy{
+		height: 100px;
+		width: 100px;
+		background-color: black;
+		border-radius: 50%;
+		position: absolute;
+		
+		
+
+	}
+	#enemy2{
+		height: 200px;
+		width:200px;
+		top: 0px;
+		left: 200px;
+		background-color: black;
+		position: absolute;
+		border-radius: 50%;
+	}
+	#enemy3{
+		height: 50px;
+		width:50px;
+		top: 0px;
+		left: 800px;
+		background-color: black;
+		position: absolute;
+		border-radius: 50%;
+	}
+	#enemy4{
+		height: 150px;
+		width:150px;
+		top: 0px;
+		left: 800px;
+		background-color: black;
+		position: absolute;
+		border-radius: 50%;
+	}
+	@keyframes expamle{
+		from {
+			font-size: 100%;
+			}
+  		to {
+			  font-size: 180%;
+			  }
+	}
+	#hrana{
+		height: 80px;
+		width:80px;
+		top: 0px;
+		left: 800px;
+		line-height: 125%;
+		background-color: orange;
+		position: absolute;
+		border-radius: 50%;
+		color: white;
+		text-align : center;
+		animation-name: expamle;
+		animation-duration: 2s;
+		animation-iteration-count: infinite;
+		font-size:100%;
+		
+	}
+	#prikazRezultata{
+		position: absolute;
+		font: 150%;
+		background-color: darkslategrey;
+		color: white;
+		top: 10px;
+		left: 10px;
+		width: 150px;
+		height: 100px;
+		border-radius: 10%;
+		text-align: center;
+	}
+	body{
+		overflow: hidden;
+		box-sizing: border-box;
+		background-color: #BEFFFF;
+	}
+
+	.alert{
+		background-color: red;
+	}
+	#alertBox{
+		position: absolute;
+		height: 300px;
+		width: 300px;
+		border-radius: 10%;
+		background-color: orange;
+		border: 10px solid red;
+		color:white;
+		align-self: center;
+		left: calc(50% - 150px);
+		top:calc(50% - 150px);
+		text-align: center;
+		display: none;
+	}
+	.innerCircle{
+		border: 8px dashed red;
+		height: 25%;
+		width: 25%;
+		left: 20%;
+		top: 20%;
+		position: absolute;
+		border-radius: 50%;
+		animation: innerCircleExp;
+		animation-duration: 1s;
+		animation-iteration-count: infinite;
+	}
+	@keyframes innerCircleExp{
+		from
+		{
+			height: 25%;
+			width: 25%;
+			left: 20%;
+			top: 20%;
+		}
+		to{
+			height:75%;
+			width: 75%;
+			left: 10%;
+			top: 10%;
+		}
+	}
+
+	</style>
+<title>Plava</title>
+<script src="./files/jquery/jquery.js"></script>
+<script src="./files/jQueryUI/jquery-ui.js"></script>
+</head>
+<body >
+
+	
+
+<div id="prikazRezultata">Rezultat:<p id="pbodovi"></p>
+
+</div>
+	<div class="n" id="kocka"></div>
+	<div id="enemy"><div class="innerCircle"><div class="innerCircle"><div class="innerCircle"></div></div></div> </div>
+	<div id="enemy2"><div class="innerCircle"><div class="innerCircle"><div class="innerCircle"></div></div></div> </div>
+	<div id="enemy3" ><div class="innerCircle"></div> </div>
+	<div id="enemy4"><div class="innerCircle"><div class="innerCircle"><div class="innerCircle"></div></div></div> </div>
+	<div id="hrana"></div>
+	<div id="alertBox">
+		<h1>::KRAJ IGRE::</h1>
+		<h2>Rezultat:</h2>
+		<h2 id="Krajnjirezultat"></h2>
+		<button style="height: 50px; width:100px; border-radius:10%; background-color: orange;
+		border: 5px solid red; " onclick="Reset()">Restart</button>
+
+	</div>
+</div>
+	
+	
+	<br>
+	
+</body>
+<script src="script.js"></script>
+<script>
+
+
+
+
+</script>
+</html>
