@@ -1,0 +1,230 @@
+
+var sirinaEkrana = document.documentElement.clientWidth;
+var visinaEkrana = parseInt(document.documentElement.clientHeight);
+
+var kocka = document.getElementById("kocka");
+var enemy = document.getElementById("enemy");
+var enemy2 = document.getElementById("enemy2");
+var enemy3 = document.getElementById("enemy3");
+var enemy4 = document.getElementById("enemy4");
+var hrana = document.getElementById("hrana");
+var alertBox = document.getElementById("alertBox");
+var krajnjiRezultat = document.getElementById("Krajnjirezultat");
+
+enemy.style.top = "0px";
+enemy.style.left = "300px";
+enemy2.style.top = "0px";
+enemy2.style.left = "200px";
+enemy3.style.top = "0px";
+enemy3.style.left = "800px";
+enemy4.style.left = "500px";
+enemy4.style.top = "0px";
+hrana.style.top = "350px";
+hrana.style.left = "500px";
+
+var intTop1 = parseInt(enemy.style.top);
+var intTop2 = parseInt(enemy2.style.top);
+var intTop3 = parseInt(enemy3.style.top);
+var intTop4 = parseInt(enemy4.style.top);
+
+var bodovi = 0;
+var dimenzijeKocke = 100;
+var poen = 15;
+
+
+
+
+function Pomak() {
+
+    if (parseInt(enemy.style.top) > visinaEkrana) {
+        intTop1 = -100;
+        enemy.style.left = calculateLeft() + "px";
+    }
+
+    if (parseInt(enemy2.style.top) > visinaEkrana) {
+        intTop2 = -400;
+        enemy2.style.left = calculateLeft() + "px";
+    }
+    if (parseInt(enemy3.style.top) > visinaEkrana) {
+        intTop3 = -50;
+        enemy3.style.left = calculateLeft() + "px";
+
+    }
+    if (parseInt(enemy4.style.top) > visinaEkrana) {
+        intTop4 = -150;
+        enemy4.style.left = calculateLeft() + "px";
+    }
+
+    enemy.style.top = intTop1 + "px";
+    intTop1 += 1;
+
+    enemy2.style.top = intTop2 + "px";
+    intTop2 += 0.7;
+
+    enemy3.style.top = intTop3 + "px";
+    intTop3 += 3;
+
+    enemy4.style.top = intTop4 + "px";
+    intTop4 += 1.2;
+
+
+}
+
+function calculateLeft() {
+    var temp;
+    do {
+        temp = Math.floor(Math.random() * (parseInt(sirinaEkrana) - 150));
+    } while (temp > sirinaEkrana);
+    return temp;
+}
+
+
+function DetectColision() {
+
+    var circle = { radius: dimenzijeKocke / 2, x: parseInt(kocka.style.left, 10), y: parseInt(kocka.style.top, 10) };//kocka
+    var circle1 = { radius: 50, x: parseInt(enemy.style.left), y: parseInt(enemy.style.top) };//enemy
+    var circle2 = { radius: 100, x: parseInt(enemy2.style.left), y: parseInt(enemy2.style.top) };//enemy2
+    var circle3 = { radius: 25, x: parseInt(enemy3.style.left), y: parseInt(enemy3.style.top) };//enemy3
+    var circle4 = { radius: 75.5, x: parseInt(enemy4.style.left), y: parseInt(enemy4.style.top) };
+
+    var dx = (circle.x + circle.radius) - (circle1.x + circle1.radius);
+    var dy = (circle.y + circle.radius) - (circle1.y + circle1.radius);
+    var distance = Math.sqrt(dx * dx + dy * dy);
+
+    if (distance < circle.radius + circle1.radius) {
+        // collision detected!
+        enemy.style.backgroundColor = "red";
+        gameOver()
+    }
+    else {
+        enemy.style.backgroundColor = "black";
+
+    }
+    var dx2 = (circle.x + circle.radius) - (circle3.x + circle3.radius);
+    var dy2 = (circle.y + circle.radius) - (circle3.y + circle3.radius);
+    var distance2 = Math.sqrt(dx2 * dx2 + dy2 * dy2);
+
+    if (distance2 < circle.radius + circle3.radius) {
+        // collision detected!
+        enemy3.style.backgroundColor = "red";
+        gameOver()
+    }
+    else {
+        enemy3.style.backgroundColor = "black";
+
+    }
+
+    var dx3 = (circle.x + circle.radius) - (circle2.x + circle2.radius);
+    var dy3 = (circle.y + circle.radius) - (circle2.y + circle2.radius);
+    var distance3 = Math.sqrt(dx3 * dx3 + dy3 * dy3);
+
+    if (distance3 < circle.radius + circle2.radius) {
+        // collision detected!
+        enemy2.style.backgroundColor = "red";
+        gameOver()
+    }
+    else {
+        enemy2.style.backgroundColor = "black";
+
+    }
+
+    var dx4 = (circle.x + circle.radius) - (circle4.x + circle4.radius);
+    var dy4 = (circle.y + circle.radius) - (circle4.y + circle4.radius);
+    var distance = Math.sqrt(dx4 * dx4 + dy4 * dy4);
+
+    if (distance < circle.radius + circle1.radius) {
+        // collision detected!
+        enemy4.style.backgroundColor = "red";
+        gameOver()
+    }
+    else {
+        enemy4.style.backgroundColor = "black";
+
+    }
+
+
+
+}
+
+
+
+
+$(document).on('mousemove', function (e) {
+    var xPos = e.pageX;
+    var yPos = e.pageY;
+
+    $('#kocka').css({
+        'top': yPos,
+        'left': xPos
+    });
+
+
+});
+
+function GetHrana() {
+    var circle5 = { radius: dimenzijeKocke / 2, x: parseInt(kocka.style.left, 10), y: parseInt(kocka.style.top, 10) };//kocka
+    var circleh = { radius: 40, x: parseInt(hrana.style.left, 10), y: parseInt(hrana.style.top, 10) };//hrana
+
+    var dxh = (circle5.x + circle5.radius) - (circleh.x + circleh.radius);
+    var dyh = (circle5.y + circle5.radius) - (circleh.y + circleh.radius);
+    var distance = Math.sqrt(dxh * dxh + dyh * dyh);
+
+    if (distance < circle5.radius + circleh.radius) {
+
+        clearInterval(IzracunajBodID);
+        IzracunajBodID = setInterval(IzracunajBod, 2000);
+        hrana.style.left = calculateLeft() + "px";
+        hrana.style.top = Math.floor(Math.random() * parseInt(visinaEkrana)) + "px";
+        bodovi += poen;
+        poen = 20;
+        dimenzijeKocke += 5;
+        kocka.style.height = dimenzijeKocke + "px";
+        kocka.style.width = dimenzijeKocke + "px";
+
+    }
+    document.getElementById("pbodovi").innerHTML = bodovi;
+    hrana.innerHTML = "<br>+" + poen;
+
+}
+
+function gameOver() {
+    document.body.style.cursor = "default";
+    dimenzijeKocke = 100;
+    kocka.style.width = dimenzijeKocke + "px";
+    kocka.style.height = dimenzijeKocke + "px";
+    krajnjiRezultat.innerHTML = bodovi;
+    alertBox.style.display = "initial";
+
+    clearInterval(PomakID);
+    clearInterval(DetectColisionID);
+    clearInterval(IzracunajBodID);
+    clearInterval(GetHranaID);
+    
+    bodovi = 0;
+    intTop1 = 0;
+    intTop2 = 0;
+    intTop3 = 0;
+    intTop4 = 0;
+    
+}
+
+function IzracunajBod() {
+    if (poen > 5)
+        poen -= 5;
+}
+
+function Reset() {
+    document.body.style.cursor = "none";
+    alertBox.style.display = "none";
+    PomakID = setInterval(Pomak, 1);
+    DetectColisionID = setInterval(DetectColision, 1);
+    IzracunajBodID = setInterval(IzracunajBod, 2000);
+    GetHranaID = setInterval(GetHrana, 1);
+
+    
+}
+var PomakID = setInterval(Pomak, 1);
+var DetectColisionID = setInterval(DetectColision, 1);
+var IzracunajBodID = setInterval(IzracunajBod, 2000);
+var GetHranaID = setInterval(GetHrana, 1);
+
